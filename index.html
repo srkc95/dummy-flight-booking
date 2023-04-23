@@ -181,43 +181,78 @@
         <p>&copy; Sreekanth C 2023</p>
       </footer>
       <script>
-        function showBookingMessage() {
-          alert('Successfully booked!');
+        function getPrice(origin, destination) {
+        const prices = {
+            'New York': {
+            'London': 100,
+            'Paris': 120,
+            'Tokyo': 200,
+            },
+            'Los Angeles': {
+            'London': 180,
+            'Paris': 150,
+            'Tokyo': 250,
+            },
+            'San Francisco': {
+            'London': 170,
+            'Paris': 130,
+            'Tokyo': 240,
+            },
+        };
+        return prices[origin][destination];
         }
-      
+
         function updateTicketValue() {
-          let basePrice = 100;
-          let classMultiplier = 1;
-          let servicesPrice = 0;
-      
-          const classEconomy = document.getElementById('economy');
-          const classBusiness = document.getElementById('business');
-          const classFirst = document.getElementById('first');
-          const passengers = document.getElementById('passengers');
-      
-          if (classBusiness.checked) {
+        const origin = document.getElementById('origin').value;
+        const destination = document.getElementById('destination').value;
+
+        if (origin && destination) {
+            let basePrice = getPrice(origin, destination);
+            let classMultiplier = 1;
+            let servicesPrice = 0;
+
+            const classEconomy = document.getElementById('economy');
+            const classBusiness = document.getElementById('business');
+            const classFirst = document.getElementById('first');
+            const passengers = document.getElementById('passengers');
+
+            if (classBusiness.checked) {
             classMultiplier = 1.5;
-          } else if (classFirst.checked) {
+            } else if (classFirst.checked) {
             classMultiplier = 2;
-          }
-      
-          const service1 = document.getElementById('service1');
-          const service2 = document.getElementById('service2');
-          const service3 = document.getElementById('service3');
-      
-          if (service1.checked) {
+            }
+
+            const service1 = document.getElementById('service1');
+            const service2 = document.getElementById('service2');
+            const service3 = document.getElementById('service3');
+
+            if (service1.checked) {
             servicesPrice += 20;
-          }
-          if (service2.checked) {
+            }
+            if (service2.checked) {
             servicesPrice += 30;
-          }
-          if (service3.checked) {
+            }
+            if (service3.checked) {
             servicesPrice += 40;
-          }
-      
-          const ticketPrice = (basePrice * classMultiplier + servicesPrice) * parseInt(passengers.value);
-          document.getElementById('ticket-price').innerText = 'Ticket Price: $' + ticketPrice.toFixed(2);
+            }
+
+            const ticketPrice = (basePrice * classMultiplier + servicesPrice) * parseInt(passengers.value);
+            document.getElementById('ticket-price').innerText = 'Ticket Price: $' + ticketPrice.toFixed(2);
         }
+        }
+
+        function showBookingMessage() {
+        alert('Successfully booked!');
+        }
+
+        document.addEventListener('DOMContentLoaded', updateTicketValue);
+
+        document.getElementById('origin').addEventListener('change', updateTicketValue);
+        document.getElementById('destination').addEventListener('change', updateTicketValue);
+        document.getElementById('economy').addEventListener('change', updateTicketValue);
+        document.getElementById('business').addEventListener('change', updateTicketValue);
+        document.getElementById('first').addEventListener('change', updateTicketValue);
+
       </script>
       
 
