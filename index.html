@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dummy Flight Booking</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 20px;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .left-column, .right-column {
+      flex-basis: 50%;
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    footer {
+      background-color: #f1f1f1;
+      text-align: center;
+      padding: 20px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+  <script>
+    function showBookingMessage() {
+      alert('Successfully booked!');
+    }
+
+    function updateTicketValue() {
+      let basePrice = 100;
+      let classMultiplier = 1;
+      let servicesPrice = 0;
+
+      const classEconomy = document.getElementById('economy');
+      const classBusiness = document.getElementById('business');
+      const classFirst = document.getElementById('first');
+
+      if (classBusiness.checked) {
+        classMultiplier = 1.5;
+      } else if (classFirst.checked) {
+        classMultiplier = 2;
+      }
+
+      const service1 = document.getElementById('service1');
+      const service2 = document.getElementById('service2');
+      const service3 = document.getElementById('service3');
+
+      if (service1.checked) {
+        servicesPrice += 20;
+      }
+      if (service2.checked) {
+        servicesPrice += 30;
+      }
+      if (service3.checked) {
+        servicesPrice += 40;
+      }
+
+      const ticketPrice = basePrice * classMultiplier + servicesPrice;
+      document.getElementById('ticket-price').innerText = 'Ticket Price: $' + ticketPrice.toFixed(2);
+    }
+  </script>
+</head>
+<body>
+    <header>
+        <h1>Dummy Flight Booking</h1>
+      </header>
+      <main>
+        <section class="left-column">
+          <h2>Personal Details</h2>
+          <form>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number:</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+              <label id="ticket-price">Ticket Price: $100.00</label>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Book Flight" onclick="showBookingMessage()">
+            </div>
+          </form>
+        </section>
+        <section class="right-column">
+          <h2>Flight Details</h2>
+          <div class="form-group">
+            <label for="date">Date of Journey:</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="origin">From:</label>
+            <select id="origin" name="origin" required>
+              <option value="New York">New York</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="San Francisco">San Francisco</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="destination">To:</label>
+            <select id="destination" name="destination" required>
+              <option value="London">London</option>
+              <option value="Paris">Paris</option>
+              <option value="Tokyo">Tokyo</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Passengers:</label>
+            <input type="number" id="passengers" name="passengers" min="1" value="1" onchange="updateTicketValue()">
+          </div>
+          <div class="form-group">
+            <label>Class:</label>
+            <input type="radio" id="economy" name="class" value="economy" checked onclick="updateTicketValue()">
+            <label for="economy">Economy</label>
+            <input type="radio" id="business" name="class" value="business" onclick="updateTicketValue()">
+            <label for="business">Business</label>
+            <input type="radio" id="first" name="class" value="first" onclick="updateTicketValue()">
+            <label for="first">First Class</label>
+          </div>
+          <div class="form-group">
+            <label>Additional Services:</label>
+            <input type="checkbox" id="service1" name="services" value="service1" onclick="updateTicketValue()">
+            <label for="service1">In-flight meal</label>
+            <input type="checkbox" id="service2" name="services" value="service2" onclick="updateTicketValue()">
+            <label for="service2">Extra legroom</label>
+            <input type="checkbox" id="service3" name="services" value="service3" onclick="updateTicketValue()">
+            <label for="service3">Priority boarding</label>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; Sreekanth C 2023</p>
+      </footer>
+      <script>
+        function showBookingMessage() {
+          alert('Successfully booked!');
+        }
+      
+        function updateTicketValue() {
+          let basePrice = 100;
+          let classMultiplier = 1;
+          let servicesPrice = 0;
+      
+          const classEconomy = document.getElementById('economy');
+          const classBusiness = document.getElementById('business');
+          const classFirst = document.getElementById('first');
+          const passengers = document.getElementById('passengers');
+      
+          if (classBusiness.checked) {
+            classMultiplier = 1.5;
+          } else if (classFirst.checked) {
+            classMultiplier = 2;
+          }
+      
+          const service1 = document.getElementById('service1');
+          const service2 = document.getElementById('service2');
+          const service3 = document.getElementById('service3');
+      
+          if (service1.checked) {
+            servicesPrice += 20;
+          }
+          if (service2.checked) {
+            servicesPrice += 30;
+          }
+          if (service3.checked) {
+            servicesPrice += 40;
+          }
+      
+          const ticketPrice = (basePrice * classMultiplier + servicesPrice) * parseInt(passengers.value);
+          document.getElementById('ticket-price').innerText = 'Ticket Price: $' + ticketPrice.toFixed(2);
+        }
+      </script>
+      
+
+      </body>
+      </html>
+      
+
+    
